@@ -1,0 +1,19 @@
+{% for post in posts %}
+  <div class="post">
+
+    <h2>{{ post.title }}</h2>
+
+    {% if post.image %}
+      <img
+        src="{{ post.image.url }}"
+        alt="{{ post.title }}"
+        style="max-width: 300px;"
+      >
+    {% endif %}
+
+    <p>{{ post.content|truncatewords:30 }}</p>
+
+    <a href="{% url 'post_detail' post.id %}">Читать далее</a>
+
+  </div>
+{% endfor %}
