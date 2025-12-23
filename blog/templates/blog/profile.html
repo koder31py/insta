@@ -1,0 +1,47 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<div style="max-width:500px;margin:auto;text-align:center;">
+
+{% if profile.avatar %}
+<img src="{{ profile.avatar.url }}" style="width:120px;height:120px;border-radius:50%;">
+{% else %}
+<div style="width:120px;height:120px;border-radius:50%;background:#0a2a3a;
+display:flex;align-items:center;justify-content:center;font-size:48px;">👤</div>
+{% endif %}
+
+<h2>{{ profile.user.username }}</h2>
+<p>{{ profile.bio|default:"Описание не добавлено" }}</p>
+
+<p>Подписчики: {{ profile.followers_count }}</p>
+
+{% if user == profile.user %}
+<a href="{% url 'edit_profile' %}">Редактировать профиль</a>
+{% else %}
+<form method="post" action="{% url 'follow' profile.user.username %}">
+    {% csrf_token %}
+    <button>
+        {% if is_following %}Отписаться{% else %}Подписаться{% endif %}
+    </button>
+</form>
+{% endif %}
+
+<hr>
+
+{% for post in posts %}
+<img src="{{ post.image.url }}" style="width:100%;border-radius:10px;"><br>
+<p>{{ post.caption }}</p>
+
+<form method="post" action="{% url 'like_post' post.id %}">
+{% csrf_token %}
+<button>
+{% if user in post.likes.all %}❤️{% else %}🤍{% endif %}
+{{ post.total_likes }}
+</button>
+</form>
+
+<hr>
+{% endfor %}
+
+</div>
+{% endblock %}

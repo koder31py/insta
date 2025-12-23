@@ -1,0 +1,73 @@
+body {
+    border: 10px solid red !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0b1320;
+    color: #e6edf3;
+}
+
+/* ====== HEADER ====== */
+header {
+    background-color: #0f1b2d;
+    padding: 12px 20px;
+    border-bottom: 1px solid #1f2a3c;
+}
+
+header a {
+    color: #e6edf3;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+/* ====== POSTS ====== */
+.post {
+    background-color: #0f1b2d;
+    border-radius: 16px;
+    padding: 14px;
+    margin: 20px auto;
+    max-width: 520px;
+    border: 1px solid #1f2a3c;
+}
+
+/* 🔥 ВАЖНО: ФИКС КАРТИНКИ */
+.post-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;     /* квадрат как Instagram */
+    object-fit: cover;       /* без растяжения */
+    border-radius: 12px;
+    background-color: #020617;
+}
+
+/* ====== POST TEXT ====== */
+.post-title {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.post-author {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* ====== ACTIONS ====== */
+.post-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.post-actions button {
+    background-color: #17212b;
+    border: 1px solid #243447;
+    color: #e6edf3;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+}

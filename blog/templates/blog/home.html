@@ -1,19 +1,44 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<div class="tabs">
+  <a href="/?tab=all" {% if tab == 'all' %}class="active"{% endif %}>Все</a>
+  <a href="/?tab=following" {% if tab == 'following' %}class="active"{% endif %}>Подписки</a>
+</div>
+
 {% for post in posts %}
-  <div class="post">
+<div class="post-card">
 
-    <h2>{{ post.title }}</h2>
+  <div class="post-header">
+    <strong>{{ post.author.username }}</strong>
 
-    {% if post.image %}
-      <img
-        src="{{ post.image.url }}"
-        alt="{{ post.title }}"
-        style="max-width: 300px;"
-      >
+    {% if user.is_authenticated and user != post.author %}
+      <a href="{% url 'follow' post.author.username %}" class="follow-btn">
+        {% if user in post.author.profile.followers.all %}
+          Отписаться
+        {% else %}
+          Подписаться
+        {% endif %}
+      </a>
     {% endif %}
-
-    <p>{{ post.content|truncatewords:30 }}</p>
-
-    <a href="{% url 'post_detail' post.id %}">Читать далее</a>
-
   </div>
+
+<img src="{{ post.image.url }}" class="post-image" style="
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    max-height: 400px;
+">
+
+
+
+  <p>{{ post.caption }}</p>
+
+  <div class="post-actions">
+    ❤️ 💬 🚫
+  </div>
+
+</div>
 {% endfor %}
+
+{% endblock %}

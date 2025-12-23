@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<h2>Новый пост</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="file" name="image" required><br><br>
+  <textarea name="caption" placeholder="Описание"></textarea><br><br>
+  <button type="submit">Опубликовать</button>
+</form>
+
+{% endblock %}

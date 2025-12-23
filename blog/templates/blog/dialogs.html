@@ -1,0 +1,34 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<h2>Сообщения</h2>
+
+{% for user in users %}
+<p>
+    <a href="{% url 'dialog' user.username %}">
+        @{{ user.username }}
+    </a>
+</p>
+{% endfor %}
+
+{% endblock %}
+{% extends "blog/base.html" %}
+{% block content %}
+
+<h3>Диалог с @{{ other_user.username }}</h3>
+
+<div style="background:#111;padding:10px;border-radius:8px;">
+{% for msg in messages %}
+    <p style="color:{% if msg.sender == user %}#4caf50{% else %}#fff{% endif %}">
+        <b>@{{ msg.sender.username }}:</b> {{ msg.text }}
+    </p>
+{% endfor %}
+</div>
+
+<form method="post" style="margin-top:10px;">
+    {% csrf_token %}
+    <input name="text" placeholder="Сообщение..." style="width:80%">
+    <button>➤</button>
+</form>
+
+{% endblock %}
